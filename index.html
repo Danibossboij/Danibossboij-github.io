@@ -81,140 +81,42 @@
       </div>
     </header>
     <!-- end header section -->
-    <!-- slider section -->
-    <section class="slider_section position-relative">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container">
-              <div class="col-lg-10 col-md-11 mx-auto">
-                <div class="detail-box">
-                  <div>
-                    <h3>
-                      Fly High
-                    </h3>
-                    <h2>
-                      With SkyWings
-                    </h2>
-                    <h1>
-                      Roblox's Premier Airline
-                    </h1>
-                    <p>
-                      SkyWings Airlines is a top Roblox airline dedicated to providing an immersive and enjoyable virtual
-                      flying experience. Join us for exciting adventures in the skies!
-                    </p>
-                    <div class="">
-                      <a href="https://discord.com/invite/gvSwAXZcec">
-                        Join Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Additional carousel items... -->
-        </div>
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <!-- More indicators... -->
-        </ol>
-      </div>
-    </section>
-    <!-- end slider section -->
   </div>
 
-  <!-- Us section -->
-  <section id="why-choose-us-section" class="us_section layout_padding">
+  <!-- Send Us an Email section -->
+  <section id="send-email-section" class="contact_section layout_padding">
     <div class="container">
       <div class="heading_container fade-in">
         <h2>
-          Why Choose Us
-        </h2>
-      </div>
-      <div class="us_container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/u-1.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Quality Service
-                </h5>
-                <p>
-                  SkyWings offers top-tier virtual airline services, ensuring an enjoyable and realistic flight
-                  experience.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Additional sections... -->
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end Us section -->
-
-  <!-- Contact Us section -->
-  <section id="contact-section" class="contact_section layout_padding">
-    <div class="container">
-      <div class="heading_container fade-in">
-        <h2>
-          Contact Us
+          Send Us an Email
         </h2>
       </div>
       <div class="contact_container">
         <div class="row">
           <div class="col-md-6">
             <div class="form_container">
-              <form id="contact-form">
+              <form id="email-form">
                 <div class="form-group">
-                  <input type="text" id="name" class="form-control" placeholder="Your Name" required />
+                  <input type="text" id="email-name" class="form-control" placeholder="Your Name" required />
                 </div>
                 <div class="form-group">
-                  <input type="email" id="email" class="form-control" placeholder="Your Email" required />
+                  <input type="email" id="email-address" class="form-control" placeholder="Your Email" required />
                 </div>
                 <div class="form-group">
-                  <textarea id="message" class="form-control" placeholder="Your Message" required></textarea>
+                  <textarea id="email-message" class="form-control" placeholder="Your Message" required></textarea>
                 </div>
                 <div class="btn_box">
                   <button type="submit">
-                    Send
+                    Send Email
                   </button>
                 </div>
               </form>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="detail-box">
-              <h5>
-                Get in touch with us for any questions or inquiries.
-              </h5>
-              <p>
-                Whether you're interested in joining SkyWings Airlines, have a question about our services, or just want
-                to chat, we're here to help. Use the form to send us a message, and we'll get back to you as soon as
-                possible!
-              </p>
-              <div class="info_box">
-                <a href="mailto:contact@skywings.com">
-                  <i class="fa fa-envelope"></i> support@skywingsrblx.xyz
-                </a>
-              </div>
-              <div class="info_box">
-                <a href="https://discord.com/invite/gvSwAXZcec">
-                  <i class="fa fa-discord"></i> Join our Discord
-                </a>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- end Contact Us section -->
 
   <!-- footer section -->
   <footer class="footer_section">
@@ -230,61 +132,42 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <!-- bootstrap js -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Scroll Event Listener for Fade-In Effect
-    document.addEventListener("scroll", function () {
-      const fadeInElements = document.querySelectorAll(".fade-in");
-      fadeInElements.forEach(element => {
-        const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          element.classList.add("visible");
-        }
-      });
-    });
-
-    // Contact Form Submission
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
+  
+  <!-- Include EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <script type="text/javascript">
+    (function(){
+        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    })();
+    
+    // Handle form submission
+    document.getElementById('email-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
       // Get form data
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
+      const name = document.getElementById('email-name').value;
+      const email = document.getElementById('email-address').value;
+      const message = document.getElementById('email-message').value;
 
-      // Payload for the webhook
-      const payload = {
-        embeds: [{
-          title: "New Contact Us Form Submission",
-          fields: [
-            { name: "Name", value: name },
-            { name: "Email", value: email },
-            { name: "Message", value: message }
-          ]
-        }]
+      // Create the template parameters for EmailJS
+      const templateParams = {
+        name: name,
+        email: email,
+        message: message
       };
 
-      // Send data to Discord webhook
-      fetch('https://discord.com/api/webhooks/1279724261019484191/1mv_5y_PnmnkWdYSLR5jdv5cLNWEcr21zrv2fThOxvalL7vpe8NtiKJZ1i-Nca_zBNie', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('Your message has been sent successfully!');
-        } else {
-          alert('There was a problem sending your message. Please try again later.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('There was a problem sending your message. Please try again later.');
-      });
+      // Send email via EmailJS
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(function(response) {
+          alert('Your email has been sent successfully!');
+        }, function(error) {
+          alert('Failed to send the email. Please try again later.');
+          console.error('Email sending error:', error);
+        });
     });
   </script>
 </body>
 
 </html>
+
